@@ -1,0 +1,109 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} Shop For Discount-Track Your Order {% endblock %}
+{% load static %}
+{% block body %} 
+<main class="bg-light">
+    <div class="container">
+        <div class="col my-4">
+            <h2>Shop For Discount - Track Your Orders</h2>
+            <h4>Shop For Discount - Enter Your Order ID and Email address to track your order</h4>
+            <div class="col my-4">
+                <form class="row g-3" method="POST" action="#" id="trackerForm">{% csrf_token %}
+                    <div class="col-md-6">
+                        <label for="orderid" class="form-label">Order ID</label>
+                        <input type="text" class="form-control" name="orderid" required=true placeholder="Enter your Order ID" id="orderid">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" required=true placeholder="Enter your Email ID" id="email">
+                    </div>
+                    <div class="col-12 my-4">
+                        <button type="submit" class="btn btn-outline-success form-control">Track Your Order</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-my-4">
+                <div class="my-4">
+                    <ul class="list-group" id="items">
+                    </ul>
+                </div>
+
+                <div class="my-4">
+                    <ul class="list-group" id="citems">
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+    <!-- <h6>{{thank}}</h6> -->
+{% endblock %}
+{% block js %}
+<script>
+    $('#trackerForm').submit(function(event){
+        $("#items").empty();
+
+        var formData = {
+            'orderid':$("input[name=orderid]").val(),
+            'email':$("input[name=email]").val(),
+            'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val(),
+        };
+
+        $.ajax({
+            type:'POST',
+            url:'/shop/tracker/',
+            data:formData,
+            encode:true
+        })
+        .done(function(data){
+            $('#citems').empty();
+            console.log(data);
+            data = JSON.parse(data);
+            if(data['status']=='success'){
+                updates=data['updates'];
+                mystr = `<li class="list-group-item active d-flex justify-content-between align-items-center">
+                              <h3>Your Order Status</h3>
+                              </li>`
+                    $("#items").append(mystr);
+                for(i=0;i<updates.length;i++){
+                    let txt = updates[i]['text'];
+                    let time  = updates[i]['time'];
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                              ${txt}
+                              <span class="badge bg-primary rounded-pill">${time}</span>
+                              </li>`
+                    $("#items").append(mystr);
+                    }
+                    // Filling the order details
+            cart=JSON.parse(data['itemsJson']);
+            console.log(cart);
+            mystr = `<li class="list-group-item active d-flex justify-content-between align-items-center">
+                              <h3>Your Order Items</h3>
+                              </li>`
+                    $("#citems").append(mystr);
+                    for(item in cart){
+                        let txt = cart[item][1];
+                        let qty = cart[item][0];
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                              ${txt}
+                              <span class="badge bg-light text-primary rounded-pill">${qty}</span>
+                              </li>`
+                    $("#citems").append(mystr);
+                    }
+            }
+            else{
+                mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                             <h5 class="font-weight-normal" style="color:red"> Sorry, We are not able to fetch your order.May be your Order ID is not correct or check your Email Id and Try Again !<h5>
+                        </li>`
+                    $("#items").append(mystr);
+            }
+
+        });
+        event.preventDefault();
+
+    });
+</script>
+{% endblock %}

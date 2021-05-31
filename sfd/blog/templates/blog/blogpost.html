@@ -1,0 +1,92 @@
+{% extends 'blog/basic.html' %}
+{% block body %}
+<main class="container my-4">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+      <div class="row">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 fst-italic">{{post.title}}</h1>
+          <p class="lead my-3">{{post.heado|slice:"0:55"}}</p> 
+          <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="row g-5">
+        <div class="col-md-8">
+          <h3 class="pb-4 mb-4 fst-italic border-bottom">
+            {{post.title}}
+          </h3>
+
+          <article class="blog-post">
+            <h2 class="blog-post-title">{{post.heado}}</h2>
+            <p class="blog-post-meta">{{post.pub_date}} by <a href="#">{{post.pub_name}}</a></p>
+            <p class="blog-post-meta"><div class="fb-like" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div></p>
+
+            <p>{{post.cheado}}</p>
+            <hr>
+            
+            <h2>{{post.head1}}</h2>
+            <p>{{post.chead1}}</p>
+            
+            <hr>
+            <h3>{{post.head2}}</h3>
+            <p>{{post.chead2}}</p>
+
+            <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout.</p>
+          </article>
+
+          <hr>
+
+          <article class="blog-post my-5">
+            <p class="lead my-3"><div class="fb-like" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div></p>
+            <p class="lead my-2"><div class="fb-like" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-width="" data-layout="standard" data-action="recommend" data-size="large" data-share="false"></div></p>
+          </article>
+
+        </div>
+
+        <div class="col-md-4">
+          <div class="position-sticky" style="top: 2rem;">
+            <div class="p-4 mb-3 bg-light rounded">
+              <h4 class="fst-italic">About</h4>
+              <p class="mb-0">Welcome all to the "Shop For Discount" , an E-Commerce website.
+                  This is Our Bolgs Section.Here you can Read about new Products and Technologies.<br>Happy Shopping.
+              </p>
+            </div>
+            <div class="position-sticky">
+              <p><div class="fb-share-button my-2" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fblog%2Fblogpost%2F4&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share it</a></div></p>
+            </div>
+            <span><img src="/media/{{post.thumbnail}}" class="bd-placeholder-img" width="300" height="300" aria-label="Placeholder: Thumbnail"></img></span>
+            <div class="p-4 my-2">
+              <h4 class="fst-italic">Archives</h4>
+              <ol class="list-unstyled mb-0">
+                <li><a href="#">March 2021</a></li>
+                <li><a href="#">February 2021</a></li>
+                <li><a href="#">January 2021</a></li>
+                <li><a href="#">December 2020</a></li>
+                <li><a href="#">November 2020</a></li>
+                <li><a href="#">October 2020</a></li>
+                <li><a href="#">September 2020</a></li>
+                <li><a href="#">August 2020</a></li>
+                <li><a href="#">July 2020</a></li>
+                <li><a href="#">June 2020</a></li>
+                <li><a href="#">May 2020</a></li>
+                <li><a href="#">April 2020</a></li>
+              </ol>
+            </div>
+
+            <div class="p-4">
+              <h4 class="fst-italic">Contact Us</h4>
+              <ol class="list-unstyled">
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Facebook</a></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-width="" data-numposts="5"></div>
+
+</main>
+{% endblock %}

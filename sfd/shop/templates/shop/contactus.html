@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <title>Shop For Discount-Contact Us</title>
+    <style>
+      #ryq:hover{
+        background-color: azure;
+      }
+      .cs:hover{
+        background-color: azure;
+        text-decoration: dotted;
+      }
+    </style>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/shop">Shop for Discount</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/shop/about">About Us</a>
+            </li>
+  
+            <li class="nav-item">
+              <a class="nav-link" href="/shop/contactus">Contact Us</a>
+            </li>
+  
+            <li class="nav-item">
+              <a class="nav-link" href="/shop/tracker">Tracker</a>
+            </li>
+  
+            <li class="nav-item">
+              <a class="nav-link active" href="#"></a>
+            </li>
+            <!-- <li>
+              <button id="del" class="btn btn-outline-danger my-2 my-sm-0" type="button">Delete Cart</button>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link active" href="/shop/meetthedeveloper" tabindex="-1">Meet the developer</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <!-- <button type="button" class="btn btn-secondary mx-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
+            Cart(<span id="cartcnt">0</span>)
+          </button> -->
+          <button type="button" id="popcart" class="btn btn-primary mx-2" data-html="true" data-toggle="popover" data-placement="bottom" title="Items in Cart"
+    data-content="Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum."><i class="fa fa-shopping-cart mr-1"></i>Cart(<span id="cartcnt">0</span>)</button>
+        </div>
+      </nav>
+
+    <div class="container my-2">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 col-xl-12 col-lg-12 bg bg-dark border border-primary">
+            <p><center> <font size="14"  class="text-primary">Raise Your Query </font></center> </p>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-12 col-sm-12 col-xs-12 col-xl-12 col-lg-12">
+            <p><font size="6" class="">Contact Us</font></p>
+          </div>
+        </div>
+        <form action="/shop/contactus/" method="POST">{% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required=true placeholder="Enter Your Name">
+        </div>
+        <div class="form-group">
+            <label for="name">Email</label>
+            <input type="text" class="form-control" id="email" name="email" required=true placeholder="Enter Your Email">
+        </div>
+        <div class="form-group">
+            <label for="name">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required=true placeholder="Enter Your Phone Number">
+        </div>
+        <div class="form-group">
+            <label for="desc">How May We Help You ?</label>
+            <textarea class="form-control" id="desc" name="desc" rows="5" required=true placeholder="Your Query Here" ></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" id="btncontact" class="btn btn-outline-success form-control" style="border-color: #ccff00;">Submit</button>
+        </div>
+        </form>
+    </div>
+    
+    <div>
+        <footer class="page-footer font-small blue" style="background-color: rgb(9, 9, 17);">
+    
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3" style="color: antiquewhite;">© 2020 Copyright:
+              <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+            </div>
+            <!-- Copyright -->
+          
+          </footer>
+          <!-- Footer -->
+        
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script>
+      {% if ct %}
+      alert("Your Query has been submitted successfully.Same will be resolved within 5 to 7 business days.");
+      document.location='/shop';
+      {% endif %}
+    </script>
+
+
+</body>
+</html>

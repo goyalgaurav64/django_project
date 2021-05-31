@@ -1,0 +1,89 @@
+{% extends 'shop/basic.html' %}
+{% block title %} {{product.prod_name}}-Shop For Discount {% endblock %}
+
+<style>
+  #fs #plus:hover{
+        color: rgb(9, 248, 9);
+        cursor: pointer;
+      }
+</style>
+
+{% block body %}
+{% load static %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <img src="/media/{{product.prod_image}}" height="300px" width="300px">
+            </div>
+            <div class="row my-2 ml-4">
+                <button class="btn btn-primary mx-2 cs">Buy Now</button>
+                <button id="pr{{product.id}}" class="btn btn-primary cart mx-2  cs">Add to Cart</button>
+              </div>
+        </div>
+        <div class="col-md-8">
+            <h5>{{product.prod_name}}</h5>
+            <p>{{product.prod_Description}}</p>
+            <h6><b>Rs.</b>{{product.price|floatformat:"0"}}</h6>
+        </div>
+    </div>
+    
+  <h2>Recommended Products - Based on your search</h2>
+  <h4>Most Selling Ones</h4>
+  {%  for products in allProdsofSameCat  %}
+      {% if forloop.counter0|divisibleby:3 %} 
+      <div class="row"> {%  endif %}
+        <div class="col-md-4">
+          <a href="/shop/products/{{products.id}}">
+            <div class="card" style="width: 18rem;border-color: #007bff;">
+                <img src="/media/{{products.prod_image}}" height="150px" width="150px" class="card-img-top" alt="">
+          </a>     
+                <div class="card-body">
+                  <h5 class="card-title">{{products.prod_name}}</h5>
+                  <p class="card-text">{{products.prod_Description|slice:"0:55"}}...</p>
+                  <p class="card-text"><font size="2.5px">MRP-&#8377; {{products.price|floatformat:"0"}}</font></p>
+                  <div id="fs">
+                    <i class="fa fa-cart-plus" id="plus" style="font-size: 25px;margin-top:px;"></i>
+                    <button id="pr{{products.id}}" class="btn btn-outline-primary cart cs">Add to Cart</button>
+                  </div>
+                </div><!-- card body -->
+            </div><!-- card -->
+        </div><!-- col-md-4 -->
+        {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last%}
+      </div><!-- row closing -->
+    <hr>{%  endif %}
+    {%  endfor %} 
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    if(localStorage.getItem('cart') == null ){
+      var cart = {};
+    }
+    else{
+      cart = JSON.parse(localStorage.getItem('cart'));
+      document.getElementById("cartcnt").innerHTML = Object.keys(cart).length;
+    }
+
+    $('.cart').click(function(){
+      // console.log('clicked');
+      var idstr=this.id.toString();
+      // console.log(idstr);
+      if(cart[idstr]!=undefined){
+        cart[idstr]+=1;
+      }
+      else{
+        cart[idstr]=1;
+      }
+      console.log(cart);
+      localStorage.setItem('cart',JSON.stringify(cart));
+      document.getElementById("cartcnt").innerHTML = Object.keys(cart).length;
+    });
+
+    $('#popcart').popover();
+    document.getElementById("popcart").setAttribute('data-content','<h6>Cart</h6>');
+
+  </script>
+  {% endblock %}
