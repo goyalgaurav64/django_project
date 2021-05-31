@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from . models import Product,Contact,Orders,OrderUpdate
 from math import ceil
 from django.views.decorators.csrf import csrf_exempt
-from Paytm import checksum
+from Payt import checksum
 import json
 MERCHANT_KEY = 'kbzk1DSbJiV_O3p5'
 
